@@ -16,8 +16,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@turf/turf": "^7.2.0",
+    "leaflet": "^1.9.4",
     "pinia": "^3.0.3",
     "vue": "^3.5.22",
+    "vue-leaflet": "^0.1.0",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
@@ -29,6 +32,7 @@
     "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
     "prettier": "3.6.2",
+    "sass": "^1.93.2",
     "vite": "^7.1.7",
     "vite-plugin-vue-devtools": "^8.0.2"
   }

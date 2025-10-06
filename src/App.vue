@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <p>hello vue</p>
+  <RouterView />
 </template>
 
 <style scoped></style>
