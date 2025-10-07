@@ -1,16 +1,20 @@
 <script setup>
-  import { ref } from 'vue';
   import PlaceHeader from './components/PlaceHeader.vue';
 
-  const activeSidebar = ref(false);
+  const emit = defineEmits(['toggle-sidebar']);
+
+  defineProps({
+    activeSidebar: {
+      type: Boolean,
+      default: false,
+    },
+  });
 </script>
 
 <template>
-  <aside
-    :class="['sidebar', { active: activeSidebar }]"
-    @click="activeSidebar = !activeSidebar">
+  <aside :class="['sidebar', { active: activeSidebar }]">
     <div class="sidebar__container">
-      <PlaceHeader />
+      <PlaceHeader @toggle-sidebar="emit('toggle-sidebar')" />
     </div>
   </aside>
 </template>
@@ -23,7 +27,7 @@
     height: 100%;
     width: 250px;
     transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s linear;
 
     &.active {
       transform: translateX(calc(-100% + 50px));

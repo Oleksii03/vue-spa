@@ -2,7 +2,6 @@
   import { ref } from 'vue';
 
   const activeBtn = ref(false);
-
   const emit = defineEmits(['toggle-sidebar']);
 </script>
 
