@@ -9,7 +9,7 @@ export const usePlacesStore = defineStore('places', () => {
   const places = ref([]);
 
   async function getPlacesInPolygon(features) {
-    const partialFeatures = features.slice(0, 2);
+    const partialFeatures = features.slice(0, 5);
 
     for (let i = 0; i < partialFeatures.length; i++) {
       const feature = partialFeatures[i];

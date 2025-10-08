@@ -46,6 +46,9 @@
       width: 100%;
       padding: 20px 15px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
   }
 </style>
