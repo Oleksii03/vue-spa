@@ -1,40 +1,14 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
-  import * as turf from '@turf/turf';
+  import { onMounted } from 'vue';
   import polygons from '@/modules/places/data/polygons.json';
   import { convertToGeoJSON } from '@/modules/places/utils/geoJsonConverter';
-  import Nominatim from 'nominatim-browser';
+  import { usePlacesStore } from '@/modules/places/stores/placesStore';
 
   const { features } = convertToGeoJSON(polygons);
-  const places = ref([]);
 
-  async function getPlacesInPolygon() {
-    const partialFeatures = features.slice(0, 3);
+  const { places, getPlacesInPolygon } = usePlacesStore();
 
-    for (let i = 0; i < partialFeatures.length; i++) {
-      const feature = partialFeatures[i];
-      const [lon, lat] = turf.center(feature).geometry.coordinates;
-
-      if (i > 0) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-
-      try {
-        const data = await Nominatim.reverse({
-          lat,
-          lon,
-          zoom: 10,
-          addressdetails: 1,
-        });
-
-        places.value.push(data);
-      } catch (err) {
-        console.log('Помилка запиту:', err);
-      }
-    }
-  }
-
-  onMounted(() => getPlacesInPolygon());
+  onMounted(async () => await getPlacesInPolygon(features));
 </script>
 
 <template>
@@ -42,10 +16,21 @@
     <h2>Отримані місця:</h2>
     <ul>
       <li
-        v-for="(place, index) in places"
-        :key="index">
-        {{ place.display_name }}
+        v-for="{ country, state, name, place_id } in places"
+        :key="place_id">
+        {{ country }} {{ state }} {{ name }}
       </li>
     </ul>
   </div>
 </template>
+
+<style scoped>
+  h2 {
+    color: #d3cece;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    color: #d3cece;
+  }
+</style>

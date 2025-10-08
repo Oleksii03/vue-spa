@@ -18,6 +18,10 @@ export default defineConfig({
         target: 'https://nominatim.openstreetmap.org',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/nominatim/, ''),
+        headers: {
+          'User-Agent': 'Vue-SPA Development App (aapd8896@gmail.com)',
+          'Referer': 'http://localhost:5179'
+        }
       },
     },
   },
