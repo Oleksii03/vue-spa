@@ -1,23 +1,15 @@
 <script setup>
   import PlaceHeader from './components/PlaceHeader.vue';
-  import PlaceSearchBar from './components/PlaceSearchBar.vue';
   import PlaceList from './components/PlaceList.vue';
 
   const emit = defineEmits(['toggle-sidebar']);
-
-  defineProps({
-    activeSidebar: {
-      type: Boolean,
-      default: false,
-    },
-  });
+  defineProps({ activeSidebar: Boolean });
 </script>
 
 <template>
   <aside :class="['sidebar', { active: activeSidebar }]">
     <div class="sidebar__container">
       <PlaceHeader @toggle-sidebar="emit('toggle-sidebar')" />
-      <PlaceSearchBar />
       <PlaceList />
     </div>
   </aside>

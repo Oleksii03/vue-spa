@@ -1,9 +1,11 @@
 <script setup>
   import MainLayout from '@/layouts/MainLayout.vue';
   import { PlacesSidebar, PlacesMap } from '@/modules/places';
-  import { ref } from 'vue';
+  import { provide, ref } from 'vue';
 
-  const activeSidebar = ref(false);
+  const activeSidebar = ref(true);
+
+  provide('active-sidebar', activeSidebar);
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-
 import * as turf from '@turf/turf';
 import axios from 'axios';
 import { NOMINATIM_BASE_URL } from '@/modules/places/constants/index.js';
@@ -8,14 +7,15 @@ import { NOMINATIM_BASE_URL } from '@/modules/places/constants/index.js';
 export const usePlacesStore = defineStore('places', () => {
   const places = ref([]);
 
+  console.log(places.value.length);
+
   async function getPlacesInPolygon(features) {
-    const partialFeatures = features.slice(0, 5);
+    places.value = [];
 
-    for (let i = 0; i < partialFeatures.length; i++) {
-      const feature = partialFeatures[i];
-      const [lon, lat] = turf.center(feature).geometry.coordinates;
+    for (let i = 0; i < features.length; i++) {
+      if (places.value.length >= features.length) break;
 
-      // if (i > 0) await new Promise(resolve => setTimeout(resolve, 1500));
+      const [lon, lat] = turf.center(features[i]).geometry.coordinates;
 
       try {
         const { data } = await axios.get(NOMINATIM_BASE_URL, {
@@ -24,9 +24,7 @@ export const usePlacesStore = defineStore('places', () => {
             lat: lat,
             lon: lon,
           },
-          headers: {
-            'Accept-Language': 'uk',
-          },
+          headers: { 'Accept-Language': 'uk' },
         });
 
         places.value.push({
