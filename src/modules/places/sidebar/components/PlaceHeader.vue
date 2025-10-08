@@ -49,9 +49,9 @@
         height: 3px;
         background-color: $bg-light;
         transition:
-          transform 0.3s ease-in-out,
-          opacity 0.3s ease-in-out,
-          width 0.3s ease-in-out;
+          transform 0.5s ease-in-out,
+          opacity 0.5s ease-in-out,
+          width 0.5s ease-in-out;
 
         &:nth-child(1) {
           top: 0;

@@ -33,7 +33,7 @@
     }
 
     &.active {
-      grid-template-columns: 50px 1fr;
+      grid-template-columns: 52px 1fr;
     }
   }
 
