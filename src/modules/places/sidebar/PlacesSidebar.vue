@@ -76,7 +76,7 @@
       border-radius: 4px;
       background-color: $bg-gray;
       color: $bg-dark;
-      margin-right: auto;
+      margin: 0 auto;
     }
   }
 </style>
