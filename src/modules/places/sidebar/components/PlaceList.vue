@@ -13,6 +13,10 @@
   const isLoading = ref(false);
   const activeSidebar = inject('active-sidebar');
 
+  function onSelect(place) {
+    placesStore.selectPlace(place);
+  }
+
   const filteredPlaces = computed(() => {
     const query = searchQuery.value.toLowerCase();
     if (query.length < 2) return placesStore.places;
@@ -30,10 +34,6 @@
       isLoading.value = false;
     }
   });
-
-  function onSelect(place) {
-    placesStore.selectPlace(place);
-  }
 </script>
 
 <template>
@@ -62,7 +62,6 @@
   .place-body {
     opacity: 0;
     pointer-events: none;
-
     transition: opacity 0.5s linear;
 
     &.active {
@@ -77,7 +76,7 @@
     gap: 10px;
     list-style: none;
     padding: 0;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 215px);
     overflow-y: auto;
     border-radius: 5px;
     scrollbar-width: none;

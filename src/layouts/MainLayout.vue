@@ -25,7 +25,6 @@
   .wrapper {
     display: grid;
     grid-template-columns: 52px 1fr;
-
     height: 100dvh;
     transition: grid-template-columns 0.5s linear;
 
