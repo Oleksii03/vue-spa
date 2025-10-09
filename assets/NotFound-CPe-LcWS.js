@@ -1,1 +1,0 @@
-import{_ as t,c as n,a as e,o as s}from"./index-BROHHBmr.js";const a={},c={class:"not-found"};function r(d,o){return s(),n("div",c,[...o[0]||(o[0]=[e("h1",null,"404 — Page Not Found",-1),e("p",null,"На жаль, сторінку не знайдено.",-1)])])}const l=t(a,[["render",r],["__scopeId","data-v-ec198042"]]);export{l as default};
