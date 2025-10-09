@@ -21,8 +21,24 @@
       const childLayers = typeof layer.getLayers === 'function' ? layer.getLayers() : [];
       if (!childLayers.length) return;
 
-      const b = layer.getBounds();
-      if (b && b.isValid()) mapRef.value.leafletObject.fitBounds(b, { padding: [20, 20] });
+      let bounds = L.latLngBounds([]);
+      for (const child of childLayers) {
+        try {
+          if (typeof child.getBounds === 'function') {
+            const cb = child.getBounds();
+            if (cb && cb.isValid()) bounds = bounds.extend(cb);
+          } else if (typeof child.getLatLng === 'function') {
+            const ll = child.getLatLng();
+            if (ll && isFinite(ll.lat) && isFinite(ll.lng)) bounds = bounds.extend(ll);
+          }
+        } catch (e) {
+          console.error('Error fitting map bounds:', e);
+        }
+      }
+
+      if (bounds && bounds.isValid()) {
+        mapRef.value.leafletObject.fitBounds(bounds, { padding: [20, 20] });
+      }
     } catch (error) {
       console.error('Error fitting map bounds:', error);
     }

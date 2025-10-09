@@ -15,7 +15,7 @@
 
   const filteredPlaces = computed(() => {
     const query = searchQuery.value.toLowerCase();
-    if (query.length < 2) return [];
+    if (query.length < 2) return placesStore.places;
     return placesStore.places.filter(place => (place?.name || '').toLowerCase().includes(query));
   });
 
