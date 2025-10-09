@@ -9,6 +9,8 @@
   const { features } = convertToGeoJSON(polygons);
   const placesStore = usePlacesStore();
 
+  console.log(window.location.origin);
+
   const searchQuery = ref('');
   const isLoading = ref(false);
   const activeSidebar = inject('active-sidebar');
