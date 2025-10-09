@@ -17,7 +17,6 @@
 
   .place-card {
     padding: 10px;
-
     border-radius: 5px;
     color: $bg-dark;
     background-color: $bg-gray;
