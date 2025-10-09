@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import * as turf from '@turf/turf';
 import axios from 'axios';
-import { NOMINATIM_BASE_URL } from '@/modules/places/constants/index.js';
+import { buildReverseUrl } from '@/modules/places/constants/index.js';
 
 export const usePlacesStore = defineStore('places', () => {
   const places = ref([]);
@@ -18,14 +18,8 @@ export const usePlacesStore = defineStore('places', () => {
       const [lon, lat] = turf.center(features[i]).geometry.coordinates;
 
       try {
-        const { data } = await axios.get(NOMINATIM_BASE_URL, {
-          params: {
-            format: 'json',
-            lat: lat,
-            lon: lon,
-          },
-          headers: { 'Accept-Language': 'uk' },
-        });
+        const url = buildReverseUrl({ lat, lon, format: 'json', lang: 'uk' });
+        const { data } = await axios.get(url);
 
         places.value.push({
           country: data.address.country,
