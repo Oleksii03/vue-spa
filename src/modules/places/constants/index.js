@@ -55,7 +55,6 @@ function buildSearchUrl({ q, format = 'json', lang = 'uk', polygon_geojson = 1, 
     return `/api/nominatim/search?${params}`;
   }
 
-  // In production, use public CORS proxy for search requests
   const target = new URL('https://nominatim.openstreetmap.org/search');
   target.searchParams.set('format', format);
   target.searchParams.set('q', q);

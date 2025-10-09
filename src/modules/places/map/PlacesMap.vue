@@ -18,6 +18,9 @@
     if (!mapRef.value || !mapRef.value.leafletObject) return;
     try {
       const layer = L.geoJSON(features);
+      const childLayers = typeof layer.getLayers === 'function' ? layer.getLayers() : [];
+      if (!childLayers.length) return;
+
       const b = layer.getBounds();
       if (b && b.isValid()) mapRef.value.leafletObject.fitBounds(b, { padding: [20, 20] });
     } catch (error) {
@@ -53,7 +56,6 @@
     }
   );
 
-  // Fit when features become available
   watch(
     () => placesStore.features,
     feats => {
@@ -73,7 +75,6 @@
     :use-global-leaflet="false">
     <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-    <!-- Полігони -->
     <l-geo-json
       v-if="!placesStore.selectedGeometry && placesStore.features && placesStore.features.length"
       :geojson="{ type: 'FeatureCollection', features: placesStore.features }"
@@ -87,7 +88,6 @@
         })
       " />
 
-    <!-- Контур обраного населеного пункту -->
     <l-geo-json
       v-else-if="placesStore.selectedGeometry"
       :geojson="placesStore.selectedGeometry"

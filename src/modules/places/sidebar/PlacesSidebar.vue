@@ -22,6 +22,16 @@
       <template v-else>
         <PlaceDetails />
       </template>
+
+      <div
+        v-if="placesStore.selectedPlace"
+        class="sidebar__footer">
+        <button
+          class="sidebar__back"
+          @click="placesStore.clearSelection()">
+          Назад
+        </button>
+      </div>
     </div>
   </aside>
 </template>
@@ -54,29 +64,19 @@
       flex-direction: column;
       gap: 20px;
     }
-  }
 
-  .details {
-    color: $bg-light;
-
-    &__title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    &__list {
+    &__footer {
+      margin-top: auto;
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 20px;
+      justify-content: flex-end;
     }
 
     &__back {
-      padding: 8px 12px;
+      padding: 20px 30px;
       border-radius: 4px;
       background-color: $bg-gray;
       color: $bg-dark;
+      margin-right: auto;
     }
   }
 </style>
