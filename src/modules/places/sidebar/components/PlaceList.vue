@@ -22,6 +22,7 @@
   onMounted(async () => {
     isLoading.value = true;
     try {
+      placesStore.setFeatures(features);
       await placesStore.getPlacesInPolygon(features);
     } catch (err) {
       console.error('Помилка завантаження місць:', err);
@@ -29,6 +30,10 @@
       isLoading.value = false;
     }
   });
+
+  function onSelect(place) {
+    placesStore.selectPlace(place);
+  }
 </script>
 
 <template>
@@ -47,7 +52,8 @@
       <PlaceCard
         v-for="place in filteredPlaces"
         :key="place.place_id"
-        :place="place" />
+        :place="place"
+        @click="onSelect(place)" />
     </ul>
   </div>
 </template>

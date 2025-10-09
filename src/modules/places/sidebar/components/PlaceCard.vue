@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <li class="place-card">
+  <li class="place-card" role="button" tabindex="0">
     <div class="place-card__content">
       <h3 class="place-card__title">{{ place.name }}</h3>
       <p class="place-card__state">{{ place.state }}</p>
@@ -20,5 +20,10 @@
     border-radius: 5px;
     color: $bg-dark;
     background-color: $bg-gray;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
   }
 </style>

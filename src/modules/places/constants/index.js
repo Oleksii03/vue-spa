@@ -1,4 +1,4 @@
-export { buildReverseUrl };
+export { buildReverseUrl, buildSearchUrl };
 
 function buildReverseUrl({ lat, lon, format = 'json', lang = 'uk' }) {
   if (
@@ -41,4 +41,30 @@ function buildReverseUrl({ lat, lon, format = 'json', lang = 'uk' }) {
     'accept-language': lang,
   }).toString();
   return `/api/nominatim/reverse?${qs}`;
+}
+
+function buildSearchUrl({ q, format = 'json', lang = 'uk', polygon_geojson = 1, limit = 1 }) {
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
+    const params = new URLSearchParams({
+      format,
+      q,
+      'accept-language': lang,
+      polygon_geojson: String(polygon_geojson),
+      limit: String(limit),
+    }).toString();
+    return `/api/nominatim/search?${params}`;
+  }
+
+  // In production, use public CORS proxy for search requests
+  const target = new URL('https://nominatim.openstreetmap.org/search');
+  target.searchParams.set('format', format);
+  target.searchParams.set('q', q);
+  target.searchParams.set('accept-language', lang);
+  target.searchParams.set('polygon_geojson', String(polygon_geojson));
+  target.searchParams.set('limit', String(limit));
+
+  const proxy = new URL('https://api.allorigins.win/raw');
+  proxy.searchParams.set('url', target.toString());
+
+  return proxy.toString();
 }

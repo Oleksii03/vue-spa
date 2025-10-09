@@ -1,16 +1,27 @@
 <script setup>
   import PlaceHeader from './components/PlaceHeader.vue';
   import PlaceList from './components/PlaceList.vue';
+  import PlaceDetails from './components/PlaceDetails.vue';
+  import { usePlacesStore } from '@/modules/places/stores/placesStore';
 
   const emit = defineEmits(['toggle-sidebar']);
   defineProps({ activeSidebar: Boolean });
+
+  const placesStore = usePlacesStore();
 </script>
 
 <template>
   <aside :class="['sidebar', { active: activeSidebar }]">
     <div class="sidebar__container">
       <PlaceHeader @toggle-sidebar="emit('toggle-sidebar')" />
-      <PlaceList />
+
+      <template v-if="!placesStore.selectedPlace">
+        <PlaceList />
+      </template>
+
+      <template v-else>
+        <PlaceDetails />
+      </template>
     </div>
   </aside>
 </template>
@@ -42,6 +53,30 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+    }
+  }
+
+  .details {
+    color: $bg-light;
+
+    &__title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    &__back {
+      padding: 8px 12px;
+      border-radius: 4px;
+      background-color: $bg-gray;
+      color: $bg-dark;
     }
   }
 </style>
