@@ -24,25 +24,18 @@
 
   .wrapper {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 52px 1fr;
+
     height: 100dvh;
     transition: grid-template-columns 0.5s linear;
 
-    @media (min-width: $sm) {
-      grid-template-columns: 350px 1fr;
-    }
-
     &.active {
-      grid-template-columns: 52px 1fr;
-    }
-  }
+      grid-template-columns: 250px 1fr;
 
-  .sidebar-wrapper {
-    background-color: $bg-dark;
-    width: 250px;
-    height: 100%;
-    transform: translateX(0);
-    transition: width 0.5s linear;
+      @media (min-width: $sm) {
+        grid-template-columns: 350px 1fr;
+      }
+    }
   }
 
   .content-wrapper {

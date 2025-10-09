@@ -9,8 +9,6 @@
   const { features } = convertToGeoJSON(polygons);
   const placesStore = usePlacesStore();
 
-  console.log(window.location.origin);
-
   const searchQuery = ref('');
   const isLoading = ref(false);
   const activeSidebar = inject('active-sidebar');
@@ -56,13 +54,14 @@
 
 <style scoped>
   .place-body {
-    opacity: 1;
-    pointer-events: auto;
+    opacity: 0;
+    pointer-events: none;
+
     transition: opacity 0.5s linear;
 
     &.active {
-      opacity: 0;
-      pointer-events: none;
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 

@@ -22,11 +22,12 @@
     background-color: $bg-dark;
     height: 100%;
     width: 250px;
-    transform: translateX(0);
+    transform: translateX(calc(-100% + 55px));
+
     transition: transform 0.5s linear;
 
     &.active {
-      transform: translateX(calc(-100% + 55px));
+      transform: translateX(0);
     }
 
     @media (min-width: $sm) {

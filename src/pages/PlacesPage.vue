@@ -3,7 +3,7 @@
   import { PlacesSidebar, PlacesMap } from '@/modules/places';
   import { provide, ref } from 'vue';
 
-  const activeSidebar = ref(true);
+  const activeSidebar = ref(false);
 
   provide('active-sidebar', activeSidebar);
 </script>
